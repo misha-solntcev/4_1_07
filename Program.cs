@@ -52,19 +52,16 @@ namespace _4_1_07
                 if (flag)
                     list.Add(product);
             }
-            Console.WriteLine("Произведения элементов строк.");
+            Console.WriteLine("Произведения элементов строк:");
             foreach (int product in list)
                 Console.Write($"{product}, ");
             Console.WriteLine();            
 
-            // Объявляем массив списков элементов диагоналей.
-            List<int>[] diag = new List<int>[array.GetLength(0) - 1]; 
-            
             Console.WriteLine($"Диагонали слева: ");
             for (int k = 1; k < array.GetLength(0) - 1; k++)
             {
                 for (int i = 0; i < array.GetLength(0); i++)
-                {
+                {                    
                     for (int j = 0; j < array.GetLength(1); j++)
                     {
                         if (i == j + k)
