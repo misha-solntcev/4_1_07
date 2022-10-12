@@ -55,37 +55,60 @@ namespace _4_1_07
             Console.WriteLine("Произведения элементов строк:");
             foreach (int product in list)
                 Console.Write($"{product}, ");
-            Console.WriteLine();            
+            Console.WriteLine();
 
-            Console.WriteLine($"Диагонали слева: ");
-            for (int k = 1; k < array.GetLength(0) - 1; k++)
-            {
-                for (int i = 0; i < array.GetLength(0); i++)
-                {                    
+            // Определяем и активируем массив списков для записи элементов диагоналей.
+            List<int>[] diagonals = new List<int>[(array.GetLength(0) - 2)*2];
+            diagonals[0] = new List<int>();
+            diagonals[1] = new List<int>();
+            diagonals[2] = new List<int>();
+            diagonals[3] = new List<int>();
+            diagonals[4] = new List<int>();
+            diagonals[5] = new List<int>();
+            
+            for (int k = 1; k < array.GetLength(0) - 1; k++)                            
+                for (int i = 0; i < array.GetLength(0); i++)                                    
                     for (int j = 0; j < array.GetLength(1); j++)
                     {
                         if (i == j + k)
-                        {
-                            Console.Write($" {array[i, j]}, ");                            
-                        }                            
+                            diagonals[k - 1].Add(array[i, j]);
+                        if (j == i + k)
+                            diagonals[k + 2].Add(array[i, j]);
                     }
+                        
+            // Вывод в консоль элементов диагоналей.
+            Console.WriteLine("Элементы диагоналей:");
+            for (int i = 0; i < diagonals.Length; i++)
+            {
+                foreach (int d in diagonals[i])
+                {
+                    Console.Write($"{d}, ");
                 }
                 Console.WriteLine();
             }
 
-            Console.WriteLine($"Диагонали справа: ");
-            for (int k = 1; k < array.GetLength(0) - 1; k++)
+            // Расчет суммы элементов диагоналей.
+            List<int> summ = new List<int>();
+            for (int i = 0; i < diagonals.Length; i++)
             {
-                for (int i = 0; i < array.GetLength(0); i++)
+                int sum = 0;
+                for (int j = 0; j < diagonals[i].Count; j++)
                 {
-                    for (int j = 0; j < array.GetLength(1); j++)
-                    {
-                        if (j == i + k)
-                            Console.Write($" {array[i, j]}, ");
-                    }                    
+                    sum += diagonals[i][j];
                 }
-                Console.WriteLine();
+                summ.Add(sum);
             }
+            Console.WriteLine($"Суммы элементов диагоналей: ");
+            foreach (int sum in summ)
+                Console.Write($"{sum}, ");
+            Console.WriteLine();
+
+            // Поиск максимума
+            int max = summ[0];
+            for (int i = 1; i < summ.Count; i++)
+                if (summ[i] > max)
+                    max = summ[i];
+            Console.WriteLine($"Максимум среди сумм: {max}");
             Console.ReadKey();
         }
     }
