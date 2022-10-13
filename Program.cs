@@ -27,11 +27,14 @@ namespace _4_1_07
                 { 14, 8, 9, 0, 2, 3 },
             };
 
+            int n = array.GetLength(0);
+            int m = array.GetLength(1);
+
             // Вывод в консоль исходного массива.
             Console.WriteLine($"Исходный массив: ");
-            for (int i = 0; i < array.GetLength(0); i++)
+            for (int i = 0; i < n; i++)
             {
-                for (int j = 0; j < array.GetLength(1); j++)
+                for (int j = 0; j < m; j++)
                 {
                     Console.Write($" {array[i, j]}, ");
                 }
@@ -40,11 +43,11 @@ namespace _4_1_07
 
             // Произведение элементов в тех строках, которые не содержат отрицательных элементов;
             List<int> list = new List<int>();
-            for (int i = 0; i < array.GetLength(0); i++)
+            for (int i = 0; i < n; i++)
             {
                 bool flag = true;
                 int product = 1;
-                for (int j = 0; j < array.GetLength(1); j++)
+                for (int j = 0; j < m; j++)
                 {
                     product *= array[i, j];
                     if (array[i, j] < 0)
@@ -59,13 +62,13 @@ namespace _4_1_07
             Console.WriteLine();
 
             // Определяем и активируем массив списков для записи элементов диагоналей.
-            List<int>[] diagonals = new List<int>[array.GetLength(0) + 4];
+            List<int>[] diagonals = new List<int>[n + 4];
             for (int i = 0; i < diagonals.Length; i++)
                 diagonals[i] = new List<int>();            
             // Записываем элементы диагоналей в массив списков.
-            for (int k = 1; k < array.GetLength(0) ; k++)                            
-                for (int i = 0; i < array.GetLength(0); i++)                                    
-                    for (int j = 0; j < array.GetLength(1); j++)
+            for (int k = 1; k < n ; k++)                            
+                for (int i = 0; i < n; i++)                                    
+                    for (int j = 0; j < m; j++)
                     {
                         if (i == j + k)
                             diagonals[k - 1].Add(array[i, j]);
